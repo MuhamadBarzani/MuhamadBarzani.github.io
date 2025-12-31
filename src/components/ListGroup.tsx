@@ -1,12 +1,23 @@
 function ListGroup() {
-  const items = ["Muhamad", "Bahroz", "Zheer", "Sami"];
+  const items: string[] = ["Muhamad", "Bahroz", "Zheer", "Sami"];
+
+  function getList() {
+    if (items.length === 0) {
+      return <p>No Items Returned</p>;
+    } else {
+      return (
+        <ul className="list-group">
+          {items.map((item) => (
+            <li className="list-group-item">{item}</li>
+          ))}
+        </ul>
+      );
+    }
+  }
   return (
     <>
-      <ul className="list-group">
-        {items.map((item) => (
-          <li className="list-group-item">{item}</li>
-        ))}
-      </ul>
+      <h1>List</h1>
+      {getList()}
     </>
   );
 }
