@@ -1,19 +1,21 @@
 import { useState } from "react";
-
-function ListGroup() {
-  const items: string[] = ["Muhamad", "Bahroz", "Zheer", "Sami"];
+interface Props {
+  header: string;
+  items: string[];
+}
+function ListGroup(props: Props) {
   function handleClick(index: number) {
-    console.log(index + "-" + items[index]);
+    console.log(index + "-" + props.items[index]);
     setSelectedIndex(index);
   }
   const [selectedIndex, setSelectedIndex] = useState(-1);
   function getList() {
-    if (items.length === 0) {
+    if (props.items.length === 0) {
       return <p>No Items Returned</p>;
     } else {
       return (
         <ul className="list-group">
-          {items.map((item, index) => (
+          {props.items.map((item, index) => (
             <li
               className={
                 selectedIndex === index
@@ -32,7 +34,7 @@ function ListGroup() {
   }
   return (
     <>
-      <h1>List</h1>
+      <h1>{props.header}</h1>
       {getList()}
     </>
   );
