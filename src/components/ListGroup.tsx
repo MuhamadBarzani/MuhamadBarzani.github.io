@@ -2,20 +2,23 @@ import { useState } from "react";
 interface Props {
   header: string;
   items: string[];
+  onSelectItem: (item: string) => void;
 }
-function ListGroup(props: Props) {
-  function handleClick(index: number) {
-    console.log(index + "-" + props.items[index]);
+function ListGroup({ items, header, onSelectItem }: Props) {
+  function handleClick(item: string, index: number) {
+    onSelectItem(item);
     setSelectedIndex(index);
   }
+
   const [selectedIndex, setSelectedIndex] = useState(-1);
+
   function getList() {
-    if (props.items.length === 0) {
+    if (items.length === 0) {
       return <p>No Items Returned</p>;
     } else {
       return (
         <ul className="list-group">
-          {props.items.map((item, index) => (
+          {items.map((item, index) => (
             <li
               className={
                 selectedIndex === index
@@ -23,7 +26,7 @@ function ListGroup(props: Props) {
                   : "list-group-item"
               }
               key={item}
-              onClick={() => handleClick(index)}
+              onClick={() => handleClick(item, index)}
             >
               {item}
             </li>
@@ -34,7 +37,7 @@ function ListGroup(props: Props) {
   }
   return (
     <>
-      <h1>{props.header}</h1>
+      <h1>{header}</h1>
       {getList()}
     </>
   );
